@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0"?>
 <config>
 	<info>
 		<type>{installtype}</type>
@@ -14,19 +14,6 @@
 		<codename>{codename}</codename>
 		<video></video>
 		<support>{support}</support>
-		<documentation></documentation>
-		<forum></forum>
-		<mailinglist></mailinglist>
-		<network></network>
-		<price>0</price>
-		<releasetype></releasetype>
-		<promotionlevel>0</promotionlevel>
-		<promotiontext></promotiontext>
-		<minloaderversion></minloaderversion>
-		<mincoreversion></mincoreversion>
-		<disablefull>false</disablefull>
-		<trial>false</trial>
-		<packagedby></packagedby>
 		<created>{date}</created>
 		<provider>http://www.getrailo.org/ExtensionProvider.cfc</provider>
 	</info>
