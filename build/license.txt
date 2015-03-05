@@ -1,0 +1,9 @@
+Hi fellow Lucee/Railo user!
+ 
+You are hereby licensed to use this extension on your Lucee/Railo installation.
+I hope it helps you out, and don't forget to spread the word about Lucee!
+
+More info can be found at http://www.lucee.nl/
+
+Paul Klinkenberg
+www.lucee.nl

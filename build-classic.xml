@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="classic" basedir=".">
+	<description>
+        Build classic Extension - Compile
+    </description>
+    <!-- set global properties for this build -->
+
+    <import file="build-compile.xml"/>
+
+  
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+
+
+
+
+<!-- doc.json -->
+<echo file="${dist}/classic/doc.json">
+{
+"builtDate":"${NOW}",
+"version":"${bundleversion}${build.number}",
+"id":"${id}",
+"name":"${codename}",
+"codename":"${codename}",
+"label":"${label}",
+"description":"${description}",
+ "type":"${installtype}",
+ "author":"${author}",
+ "category":"${category}"
+}
+</echo>
+    
+     <!-- copy the jar just build -->
+    <copy todir="${dist}/extension/jars" failonerror="false">
+      <fileset dir="${temp}/jars/">
+        <include name="**/*.jar"/>
+      </fileset>
+      <fileset dir="${lib}">
+        <include name="**/*.jar"/>
+        <exclude name="**/lucee.jar"/>
+        <exclude name="**/javax.servlet.jar"/>
+        <exclude name="**/slf4j-*.jar"/>
+        <exclude name="**/org-apache-oro-*.jar"/>
+      </fileset>
+    </copy>
+
+
+
+    <!-- copy the logos -->
+    <copy todir="${dist}/classic">
+      <fileset dir="${build}/images">
+        <include name="**/*.*"/>
+      </fileset>
+    </copy>
+
+
+    <!-- copy installer files -->
+    <copy todir="${dist}/extension/">
+      <fileset dir="${build}">
+        <include name="**/license.txt"/>
+      </fileset>
+      <fileset dir="${build}/images">
+        <include name="**/logo.png"/>
+        <include name="**/logo.gif"/>
+        <include name="**/logo.jpg"/>
+      </fileset>
+    </copy>
+    <loadfile property="content1" srcFile="${build}/Install.cfc" />
+    <replace haystack="${content1}" needle="{class}" repl="${class}" property="content2"/>
+    <replace haystack="${content2}" needle="{label}" repl="${label}" property="content3"/>
+    <replace haystack="${content3}" needle="{desc}" repl="${description}" property="content4"/>
+    <echo message="${content4}" file="${dist}/extension/Install.cfc"/>
+
+		<!-- add variables in config.xml -->
+    <loadfile property="content5" srcFile="${build}/config.xml" />
+		<replace haystack="${content5}" needle="{installtype}" repl="${installtype}" property="content6"/>
+		<replace haystack="${content6}" needle="{id}" repl="${id}" property="content7"/>
+		<replace haystack="${content7}" needle="{codename}" repl="${codename}" property="content8"/>
+		<replace haystack="${content8}" needle="{label}" repl="${label}" property="content9"/>
+		<replace haystack="${content9}" needle="{desc}" repl="${description}" property="content10"/>
+		<replace haystack="${content10}" needle="{version}" repl="${bundleversion}${build.number}" property="content11"/>
+		<replace haystack="${content11}" needle="{category}" repl="${category}" property="content12"/>
+		<replace haystack="${content12}" needle="{author}" repl="${author}" property="content13"/>
+		<replace haystack="${content13}" needle="{support}" repl="${support}" property="content14"/>
+		<replace haystack="${content14}" needle="{date}" repl="${NOW}" property="content15"/>
+    <echo message="${content15}" file="${dist}/extension/config.xml"/>
+
+	<!-- Zip everything  -->
+	<zip destfile="${dist}/extension/thecode.zip">
+		<zipfileset dir="${tags}" erroronmissingdir="false"/>
+		<zipfileset dir="${functions}" erroronmissingdir="false"/>
+	</zip>
+
+
+    <!-- Zip everything  -->
+     <zip destfile="${dist}/classic/extension.zip">
+        <zipfileset dir="${dist}/extension"/>
+    </zip>
+		
+  </target>
+
+	<target name="buildClassic"  depends="dist" description="clean up" >
+    	<delete dir="${dist}/extension"/>
+	</target>
+
+</project>
