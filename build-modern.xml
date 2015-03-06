@@ -35,10 +35,11 @@ version: "${bundleversion}${build.number}"
 id: "${id}"
 name: "${label}"
 description: "${description}"
+</echo>
+<!-- for java extensions only
 start-bundles: false
 cache: "[{'class':'${class}','bundleName':'${bundlename}','bundleVersion':'${bundleversion}${build.number}'}]"
-</echo>
-
+-->
 
     <!-- copy custom tags -->
     <copy todir="${dist}/extension2/tags" failonerror="false">
