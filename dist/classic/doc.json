@@ -1,0 +1,13 @@
+
+{
+"builtDate":"2015-03-06 14:23:57",
+"version":"2.1.2.27",
+"id":"1F2B7326-3806-47B0-B6E0CF9968205C21",
+"name":"cfcsv",
+"codename":"cfcsv",
+"label":"CFCSV custom tag",
+"description":"Ever had to work with CSV data? Then you will want this tag!",
+ "type":"all",
+ "author":"Paul Klinkenberg",
+ "category":"Built-in tag"
+}
